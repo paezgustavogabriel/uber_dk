@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<style type="text/css">
+h1 {
+	text-align: center;
+	text-decoration: underline;
+	font-size: 27px;
+	font-family: cursive;
+	color: red;
+}
+
+h2 {
+	text-align: left;
+	font-size: 20px;
+	font-family: cursive;
+	color: silver;
+}
+
+p {
+	margin-right: 300px;
+	text-align: left;
+	font-size: 15px;
+	font-family: cursive;
+	color: black;
+	text-align: left;
+}
+
+label {
+	display: inline-block;
+	width: 70px;
+}
+</style>
+
+</head>
+<body>
+	<div id="branding">
+		<h1>INGRESOS DE VIAJES</h1>
+	</div>
+	<section id="hero">
+		<div class="container">
+			<h2>VIAJE A CUALQUIER PARTE DEL PAÍS</h2>
+			<p>hacemos viajes a todas las partes del país, tome el Uber mas
+				cercano con esta aplicación y calcule su viaje, acuérdese que a
+				partir de los 30 kilómetros se le sumara $5,5 al valor de cada
+				kilometro haciendo un total de $12.</p>
+		</div>
+	</section>
+	<label> origen </label>
+	<input type="text" id="origen">
+	<br>
+	<br>
+	<label> destino </label>
+	<input type="text" id="destino">
+	<br>
+	<br>
+	<label> km </label>
+	<input type="text" id="km">
+	<br>
+	<br>
+	<label> tiempo </label>
+	<input type="text" id="tiempo">
+	<br>
+	<br>
+	<button>ok</button>
+	<p id="precio_viaje"></p>
+	<p id="viajes"></p>
+	<p id="cantidad_viajes"></p>
+
+	<script type="text/javascript">
+		let btn_click = document.querySelector("button");
+		const tarifa_base = 20;
+		let valor_km = 6.5;
+		const valor_minuto = 2.40;
+		const valor_porcentaje = 0.035;
+		var precio_viaje = [];
+
+		btn_click.onclick = function() {
+
+			/*calcula el valor del km*/
+
+			let txt_km = document.querySelector("#km").value;
+			let txt_tiempo = document.querySelector("#tiempo").value;
+			if (txt_km < 30) {
+				let calculo_auxiliar = tarifa_base + (valor_km * txt_km)
+						+ (valor_minuto * txt_tiempo);
+				let costo_viaje = (valor_porcentaje * calculo_auxiliar)
+						+ calculo_auxiliar;
+				document.querySelector("#precio_viaje").innerHTML = "El valor del viaje es:"
+						+ costo_viaje;
+				precio_viaje.push(costo_viaje);
+				document.querySelector("#viajes").innerHTML = "Listado de viajes:"
+						+ precio_viaje.toString();
+				document.querySelector("#cantidad_viajes").innerHTML = "Cantidad de viajes:"
+						+ precio_viaje.length;
+			} else {
+				/*recargo de 5,50 por km*/
+				valor_km = 12;
+				let calculo_auxiliar = tarifa_base + (valor_km * txt_km)
+						+ (valor_minuto * txt_tiempo);
+				let costo_viaje = (valor_porcentaje * calculo_auxiliar)
+						+ calculo_auxiliar;
+				document.querySelector("#precio_viaje").innerHTML = "El valor del viaje es:"
+						+ costo_viaje;
+				precio_viaje.push(costo_viaje);
+				document.querySelector("#viajes").innerHTML = "Listado de viajes:"
+						+ precio_viaje.toString();
+				document.querySelector("#cantidad_viajes").innerHTML = "Cantidad de viajes:"
+						+ precio_viaje.length;
+
+			}
+
+		}
+	</script>
+
+</body>
+</html>
